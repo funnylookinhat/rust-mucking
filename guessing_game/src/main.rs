@@ -46,14 +46,9 @@ fn get_difficulty() -> u32 {
         println!("Easy (1), Medium (2), or Hard (3)?");
 
         let mut difficulty_input: String = String::new();
-        let result = io::stdin().read_line(&mut difficulty_input);
-
-        match result {
-            Ok(_) => {}
-            Err(_) => {
-                println!("Please enter 1, 2 or 3.");
-                continue;
-            }
+        if let Err(_) = io::stdin().read_line(&mut difficulty_input) {
+            println!("Please enter 1, 2 or 3.");
+            continue;
         }
 
         difficulty = match difficulty_input.trim().parse() {
@@ -107,7 +102,7 @@ fn human_game(max: u32) {
 fn computer_game(max: u32) {
     let secret_number = rand::rng().random_range(1..=max);
 
-    let mut guess: u32 = rand::rng().random_range(1..=max);
+    let mut guess: u32 = rand::rng().random_range(1..=100);
     loop {
         println!("Computer guessed: {}", guess);
 
