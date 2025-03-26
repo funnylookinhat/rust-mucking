@@ -2,14 +2,9 @@ use clap::{Arg, command};
 
 use rand::Rng;
 
-fn main() {
-    let chars = [
-        "😀", "😂", "🥲", "😎", "🤩", "😡", "😭", "😴", "🥳", "🤯", "🤔", "🤖", "👻", "💀", "🎃",
-        "😺", "🙀", "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷",
-        "🐸", "🐵", "🦄", "🐔", "🐧", "🐦", "🐤", "🐢", "🐍", "🦖", "🐙", "🦑", "🦞", "🦐", "🦀",
-        "🐡", "🐠", "🐬", "🦆", "🦉",
-    ];
+mod chars;
 
+fn main() {
     let matches = command!()
         .arg(
             Arg::new("lines")
@@ -45,7 +40,8 @@ fn main() {
     for _i in 0..=lines {
         let mut s = String::new();
         for _j in 0..=emojis {
-            let emoji = chars[rand::rng().random_range(1..=(chars.len() - 1))];
+            let emoji = chars::EMOJI_CHARACTERS
+                [rand::rng().random_range(1..=(chars::EMOJI_CHARACTERS.len() - 1))];
             s = s + emoji;
         }
         println!("{}", s);
