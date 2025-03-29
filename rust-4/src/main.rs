@@ -20,7 +20,7 @@ fn main() {
     }
 
     for i in 1..args.len() {
-        let arg_number: u32 = match args[i].trim().parse() {
+        let arg_number: i64 = match args[i].trim().parse() {
             Ok(num) => num,
             Err(_) => {
                 println!("{} is not a number - skipping", args[i]);
@@ -31,24 +31,18 @@ fn main() {
         let powers = get_powers(arg_number);
 
         println!("Powers of {arg_number}");
-        for j in 0..powers.len() {
-            println!(
-                "    {arg_number}^{} = {}",
-                j + 2,
-                if powers[j] == 0 {
-                    format!("Overflow!")
-                } else {
-                    format!("{}", powers[j])
-                }
-            );
+        for (j, &power) in powers.iter().enumerate() {
+            let str_result = power.map_or_else(|| "Overflow!".to_string(), |n| format!("{:#?}", n));
+            println!("    {arg_number}^{} = {}", j + 1, str_result);
         }
     }
 }
 
-fn get_powers(x: u32) -> [u32; 3] {
+fn get_powers(x: i64) -> [Option<i64>; 4] {
     [
-        x.checked_pow(2).unwrap_or(0),
-        x.checked_pow(3).unwrap_or(0),
-        x.checked_pow(4).unwrap_or(0),
+        x.checked_pow(1),
+        x.checked_pow(2),
+        x.checked_pow(3),
+        x.checked_pow(4),
     ]
 }
