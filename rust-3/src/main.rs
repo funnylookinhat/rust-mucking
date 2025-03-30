@@ -6,6 +6,7 @@ mod chars;
 
 fn main() {
     let matches = command!()
+        .about("Print a grid of emojis!")
         .arg(
             Arg::new("lines")
                 .short('l')

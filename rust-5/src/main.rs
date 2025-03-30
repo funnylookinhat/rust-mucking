@@ -1,6 +1,7 @@
 use std::env;
 
 fn print_usage() {
+    println!("Find the largest exponent for a number without overflowing! fun!");
     println!("Usage: rust5 n");
     println!("The value for n must be an integer.");
 }

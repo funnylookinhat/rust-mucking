@@ -1,6 +1,7 @@
 use std::env;
 
 fn print_usage() {
+    println!("Print some powers of numbers! Exciting!");
     println!("Usage: rust4 x [y] [z] ...");
     println!("You may provide as many numbers as you want.");
 }
